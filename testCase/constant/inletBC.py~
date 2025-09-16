@@ -1,0 +1,59 @@
+#/usr/bin/env python
+
+from math import *
+
+R = 0.035    # poluprecnik cevi
+Re = 50000   # Rejnoldsov broj
+nu = 1e-06   # kinematicka viskoznost 
+
+Um = nu*Re/(2*R)
+print Um
+
+
+r = []; U = []; W = []
+uu = []; vv = []; ww = []
+uv = []; uw =[]; vw = []
+mean = open('c5m043.dat', 'r')
+turb = open('c5r043.dat', 'r')
+
+
+dataMean = mean.readlines()
+for line in dataMean:
+    rval, Uval, Wval = line.split()
+    r.append(R*float(rval))
+    U.append(Um*float(Uval))
+    W.append(Um*fabs(float(Wval)))
+mean.close()
+
+dataTurb = turb.readlines()
+
+for line in dataTurb:
+    rVal, uuVal, vvVal, wwVal, uvVal, uwVal, vwVal = line.split()
+    uu.append(Um**2*float(uuVal))
+    vv.append(Um**2*float(vvVal))
+    ww.append(Um**2*float(wwVal))
+    uv.append(Um**2*float(uvVal))
+    uw.append(Um**2*float(uwVal))
+    vw.append(Um**2*float(vwVal))
+turb.close()
+
+k = []
+for i in range(len(uu)):
+    k.append(0.5*(uu[i]**2 + vv[i]**2 + ww[i]**2))
+
+outFile = open('inletBC.csv', 'w')
+
+outFile.write("""[Data]
+ R [ m ], Velocity Axial [ m s^-1 ], Velocity Radial [ m s^-1 ], Velocity Circumferential [ m s^-1 ], Pressure [ Pa ], Turbulence Kinetic Energy [ m^2 s^-2 ], Turbulence Eddy Dissipation [ m^2 s^-3 ]
+""")
+
+L = 0.1*2*R  ## Integralna razmera turbulencije na ulazu
+Cmu = 0.09
+for i in range(len(r)):
+    epsilon = Cmu**0.75 * k[i]**1.5/L
+    outFile.write("%.6e, %.6e, 0, %.6e, 0, %.6e, %.6e\n" % (r[i], U[i], W[i], k[i], epsilon))
+
+
+
+
+outFile.close()
