@@ -30,7 +30,13 @@ to compile added model.
 
 and replace existing file.
 
-4 - Run the test case.
+4 - Download the mesh of test case from the link
+   
+   https://drive.google.com/drive/folders/1IPPsKB14MyTl_AMfqg7NkYmSOPBAHDR9?usp=drive_link
+   
+   and paste downloaded <code>polyMesh</code> directory into <code>constant</code> subdirectory of <code>testCase</code> directory.
+
+5 - Run the test case.
 
 **5. Results**
 
