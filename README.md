@@ -4,7 +4,7 @@ The k-epsilon based eddy viscosity model developed by [Fujihiro Hamba (2017)](ht
 
 **2. Motivation**
 
-Swilirng flow is a complex flow encountered mainly in cylindrical flow domains. Therefore, it is naturally connected to physical analysis in cylindrical coordinates that results in a turbulence model in cylindrical coordinates. Since OpenFOAM uses Cartesian coordinates, it was challenging to find a solution of connecting turbulence model equations in cylindrical coordinates with OpenFoam solver in Cartesian coordinates, in order to ensure better predictions of pipe swirling flow.
+Swirling flow is a complex flow encountered mainly in cylindrical flow domains. Therefore, it is naturally connected to physical analysis in cylindrical coordinates that results in a turbulence model in cylindrical coordinates. Since OpenFOAM uses Cartesian coordinates, it was challenging to find a solution of connecting turbulence model equations in cylindrical coordinates with OpenFoam solver in Cartesian coordinates, in order to ensure better predictions of pipe swirling flow.
 
 **3. Target platform**
 
